@@ -24,8 +24,6 @@ public class Fluts {
                 }
                 schuurs.add(schuur);
             }
-
-            System.out.println("Input is " + input);
         }
 
 
@@ -43,7 +41,6 @@ public class Fluts {
 
     private void testFlut() {
         schuurs.stream().forEach(schuur -> {
-            List<Integer> flutsToBuy = schuur.getFlutsToBuy();
             int schurProfit = 0;
             int value = 0;
             for (int i = 0; i < schuur.getFluts().size(); i++) {
@@ -61,11 +58,20 @@ public class Fluts {
                     schuur.moveFlutIndex();
                 }
             }
-//            flutsToBuy.remove(flutsToBuy.size()-1);
             maxProfit += schurProfit;
             schuur.trimFlutsToBuy();
-            System.out.println("Number of flutes to buy: " + flutsToBuy);
+            System.out.println("Number of flutes to buy: " + schuur.getFlutsToBuy());
         });
-        System.out.println("Max profit is: " + maxProfit);
+        System.out.println("Maximum profit is: " + maxProfit);
+        System.out.println("Number of fluts to buy: " + getNumberOfFlutsToBuy());
     }
+
+    private Set<Integer> getNumberOfFlutsToBuy() {
+        Set<Integer> numberOfFlutsToBuy = new HashSet<>();
+        schuurs.stream().forEach(schuur -> {
+            numberOfFlutsToBuy.addAll(schuur.calculateCombinations(schuurs));
+        });
+        return numberOfFlutsToBuy;
+    }
+
 }

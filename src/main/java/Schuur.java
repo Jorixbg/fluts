@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class Schuur {
 
@@ -45,5 +43,22 @@ public class Schuur {
 
     public void trimFlutsToBuy() {
         flutsToBuy.removeIf(e -> e==0);
+    }
+
+    public Set<Integer> calculateCombinations(List<Schuur> schuurs) {
+        Set<Integer> numberOfFlutsToBuy = new HashSet<>();
+        for (int i = 0; i < this.getFlutsToBuy().size(); i++) {
+            int index = this.getFlutsToBuy().get(i);
+            int sum = index;
+            for (Schuur schuur: schuurs) {
+                if (this == schuur) {
+                    continue;
+                }
+
+                sum += schuur.getFlutsToBuy().get(0);
+            }
+            numberOfFlutsToBuy.add(sum);
+        };
+        return numberOfFlutsToBuy;
     }
 }
