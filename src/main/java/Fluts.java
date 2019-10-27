@@ -7,39 +7,34 @@ public class Fluts {
         System.out.println("Welcome to Fluts");
         Scanner scanner = new Scanner(System.in);
         String input = "";
-        while (true) {
-            input = scanner.nextLine();
-            if("0".equals(input)) {
-                break;
-            }
-
-            int numberOfSchuurs = Integer.valueOf(input);
-            for(int i = 0; i<numberOfSchuurs; i++) {
-                Schuur schuur = new Schuur();
+        try {
+            while (true) {
                 input = scanner.nextLine();
-                String[] numbers = input.trim().split(" ");
-                int numberOfFluts = Integer.valueOf(numbers[0]);
-                for(int k = 1; k<=numberOfFluts; k++) {
-                    schuur.addFlut(new Flut(Integer.valueOf(numbers[k])));
+                if ("0".equals(input)) {
+                    break;
                 }
-                schuurs.add(schuur);
+
+                int numberOfSchuurs = Integer.valueOf(input);
+                for (int i = 0; i < numberOfSchuurs; i++) {
+                    Schuur schuur = new Schuur();
+                    input = scanner.nextLine();
+                    String[] numbers = input.trim().split(" ");
+                    int numberOfFluts = Integer.valueOf(numbers[0]);
+                    for (int k = 1; k <= numberOfFluts; k++) {
+                        schuur.addFlut(new Flut(Integer.valueOf(numbers[k])));
+                    }
+                    schuurs.add(schuur);
+                }
             }
+        } catch (Exception e) {
+            System.out.println("Error while parsing input");
+            main(null);
         }
-
-
-//
         Fluts f = new Fluts();
-//        Schuur a = new Schuur();
-//        Schuur b = new Schuur();
-//        a.getFluts().addAll(Arrays.asList(new Flut(7),new Flut(3),new Flut(11),new Flut(9),new Flut(10)));
-////        a.reverseStack();
-//        b.getFluts().addAll(Arrays.asList(new Flut(1),new Flut(2),new Flut(3),new Flut(4),
-//                new Flut(10),new Flut(16),new Flut(10),new Flut(4),new Flut(16)));
-//        b.reverseStack();
-        f.testFlut();
+        f.process();
     }
 
-    private void testFlut() {
+    private void process() {
         schuurs.stream().forEach(schuur -> {
             int schurProfit = 0;
             int value = 0;
