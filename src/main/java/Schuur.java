@@ -36,9 +36,14 @@ public class Schuur {
         flutsToBuy.set(flutToBuyIndex, flutIndex);
     }
 
-    public void moveFlutIndex() {
+    public void moveFlutIndexUp() {
         flutToBuyIndex++;
         flutsToBuy.add(0);
+    }
+
+    public void moveFlutIndexBack() {
+        flutToBuyIndex--;
+        flutsToBuy.remove(flutToBuyIndex);
     }
 
     public void trimFlutsToBuy() {

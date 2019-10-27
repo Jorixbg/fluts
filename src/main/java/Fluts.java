@@ -38,6 +38,7 @@ public class Fluts {
         schuurs.stream().forEach(schuur -> {
             int schurProfit = 0;
             int value = 0;
+            boolean wasLastEqual = false;
             for (int i = 0; i < schuur.getFluts().size(); i++) {
                 int flutIndex = i+1;
                 int flutPrice = ((Flut) schuur.getFluts().get(i)).getPrice();
@@ -45,17 +46,23 @@ public class Fluts {
                 int profit = (10*flutIndex) - value;
                 if (profit > schurProfit) {
                     schurProfit = profit;
+                    if (wasLastEqual) {
+                        schuur.moveFlutIndexBack();
+                    }
                     schuur.buyNewFlut(flutIndex);
+                    wasLastEqual = false;
                 } else if (profit == schurProfit) {
-                    schuur.moveFlutIndex();
+                    schuur.moveFlutIndexUp();
                     schuur.buyNewFlut(flutIndex);
+                    wasLastEqual = true;
                 } else {
-                    schuur.moveFlutIndex();
+                    schuur.moveFlutIndexUp();
+                    wasLastEqual = false;
                 }
             }
             maxProfit += schurProfit;
             schuur.trimFlutsToBuy();
-            System.out.println("Number of flutes to buy: " + schuur.getFlutsToBuy());
+            System.out.println("Number of fluts to buy: " + schuur.getFlutsToBuy());
         });
         System.out.println("Maximum profit is: " + maxProfit);
         System.out.println("Number of fluts to buy: " + getNumberOfFlutsToBuy());
