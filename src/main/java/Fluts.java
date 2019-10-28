@@ -71,7 +71,7 @@ public class Fluts {
     private Set<Integer> getNumberOfFlutsToBuy() {
         Set<Integer> numberOfFlutsToBuy = new HashSet<>();
         schuurs.stream().forEach(schuur -> {
-            numberOfFlutsToBuy.addAll(schuur.calculateCombinations(schuurs));
+            schuur.generatePermutations(schuurs, numberOfFlutsToBuy, 0, 0);
         });
         return numberOfFlutsToBuy;
     }

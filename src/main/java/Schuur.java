@@ -66,4 +66,15 @@ public class Schuur {
         };
         return numberOfFlutsToBuy;
     }
+
+    public void generatePermutations(List<Schuur> schuurs, Set<Integer> result, int depth, int current) {
+        if (depth == schuurs.size()) {
+            result.add(current);
+            return;
+        }
+
+        for (int i = 0; i < schuurs.get(depth).getFlutsToBuy().size(); i++) {
+            generatePermutations(schuurs, result, depth + 1, current + schuurs.get(depth).getFlutsToBuy().get(i));
+        }
+    }
 }
